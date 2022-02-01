@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
@@ -7,9 +7,9 @@ import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import MercadoPagoCheckout from "react-mercadopago-checkout";
 
-
 import { Add, Remove } from "@material-ui/icons";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -160,23 +160,37 @@ const SummaryButton = styled.button`
 const Cart = () => {
   const publicKey = "TEST-156a1a0a-355f-4224-abc3-835c2039d484";
 
-  const cart = useSelector((state) => state.cart);
-  const quantity = cart.quantity;
-  const unit_price = cart.total;
-  const title = cart.title;
-
+  let cart = useSelector((state) => state.cart);
+  let quantity = cart.quantity;
+  let unit_price = cart.total;
+  let title = cart.title;
+  const sandBox = useRef();
   const [mercadopago, setMercadopago] = useState(false);
-  const [preferenceId, setPreferenceId] = useState(null); 
+  const [preferenceId, setPreferenceId] = useState(null);
 
-  const handleCheckout = async () => {
-    const res = await axios.post("http://localhost:5000/api/checkout/payment", {
-      quantity,
-      unit_price,
-      title
-    });
-    setPreferenceId(res.data.response.id);
+  const handleCheckout = () => {
     setMercadopago(true);
   };
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await axios.post(
+          "http://localhost:5000/api/checkout/payment",
+          {
+            quantity,
+            unit_price,
+            title,
+          }
+        );
+        console.log("makoefjioñjefijeiñfew");
+        setPreferenceId(res.data.response.id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    makeRequest();
+  }, [mercadopago, quantity, unit_price, title]);
 
   return (
     <Container>
@@ -185,7 +199,13 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE BUYING</TopButton>
+          <Link
+            to={"/"}
+            style={{ color: "black", textDecoration: "none" }}
+          >
+            <TopButton>CONTINUE BUYING</TopButton>
+          </Link>
+
           <TopTexts>
             <TopText>Shopping Bag</TopText>
             {/* <TopText>Your Wishlist (0)</TopText> */}
@@ -217,7 +237,9 @@ const Cart = () => {
                     <ProductAmount>{product.quantity}</ProductAmount>
                     <Remove />
                   </ProductAmountContainer>
-                  <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
+                  <ProductPrice>
+                    $ {product.price * product.quantity}
+                  </ProductPrice>
                 </PriceDetail>
               </Product>
             ))}
@@ -242,12 +264,13 @@ const Cart = () => {
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             {mercadopago && (
-          <MercadoPagoCheckout
-            publicKey={publicKey}
-            preferenceId={preferenceId}
-            locale="es-AR"
-          />
-            )} 
+              <MercadoPagoCheckout
+                innerRef={sandBox}
+                publicKey={publicKey}
+                preferenceId={preferenceId}
+                locale="es-AR"
+              />
+            )}
             <SummaryButton onClick={handleCheckout}>CHECKOUT NOW</SummaryButton>
           </Summary>
         </Bottom>

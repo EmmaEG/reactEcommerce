@@ -4,7 +4,7 @@ const dontenv = require("dotenv");
 dontenv.config();
 
 mercadopago.configure({
-    access_token: process.env.MP_KEY
+    access_token: "TEST-3612707060335789-101916-764dacad87cdc864b02eca1fab495f76-1222596"
 });
 
 router.post("/payment", async (req, res)=> {

@@ -13,7 +13,7 @@ const mercadoPagoRoute = require("./routes/mercadoPago");
 dontenv.config();
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect("mongodb://localhost:27017/reactEcommerce")
   .then(console.log("Connected to mongoDB"))
   .catch((err) => console.log(err));
 
@@ -30,6 +30,6 @@ app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", mercadoPagoRoute);
 
-app.listen(process.env.PORT || 8000, () => {
+app.listen(5000 || 8000, () => {
   console.log("Backend server is running");
 });
