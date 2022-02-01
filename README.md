@@ -4,7 +4,7 @@ Desarrollado con MERN stack
 
 DESCRIPCIÓN: Es un proyecto en base a una tienda digital.
 
-Funcionalidades del proyecto: Registro y login de usuario, navegación por diferentes listas de productos pudiendo filtrar los mismos por categoría, precio, color y tamaño. Carrito de compras reactivo, detalle de orden de compra e integración de Checkout Pro Mercado Pago.
+Funcionalidades del proyecto: Registro y login de usuario, navegación por diferentes listas de productos pudiendo filtrar los mismos por categoría, precio, color y tamaño. Carrito de compras reactivo, detalle de orden de compra e integración del Checkout Pro Mercado Pago.
 
 LINK DEL DEPLOY: (Próximamente)
 
@@ -28,7 +28,8 @@ LIBRERÍAS INSTALADAS PARA EL BACKEND:
 
 LIBRERÍAS INSTALADAS PARA EL FRONTEND:
 
-    redux
+    react-redux
+    redux-persist
     axios
     bootstrap
     react-router-dom
