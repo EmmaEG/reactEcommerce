@@ -1,4 +1,6 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+// only user persist (store.js)
+
+import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./cartSlice";
 import userReducer from "./userSlice";
 import {
@@ -19,13 +21,16 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({user: userReducer, cart: cartReducer})
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, userReducer);
 
 // export default configureStore({
-export const store = configureStore({
-    reducer: persistedReducer,
+export const store = () =>
+  configureStore({
+    reducer: {
+      cart: cartReducer,
+      // user: userReducer,
+      user: persistedReducer,
+    },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -34,7 +39,4 @@ export const store = configureStore({
     }),
   });
 
-export const persistor = persistStore(store);
-
-// check userPersis.txt because there i used only user persist and here i used combineReducer
-// for persist cart and user data
+export let persistor = persistStore(store);
