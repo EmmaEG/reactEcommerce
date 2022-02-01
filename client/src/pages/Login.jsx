@@ -55,6 +55,10 @@ const Button = styled.button`
   }
 `;
 
+const Error = styled.span`
+  color: red;
+`;
+
 // const Link = styled.a`
 //   margin: 5px 0px;
 //   font-size: 14px;
@@ -90,6 +94,7 @@ const Login = () => {
           <Button onClick={handleLogin} disabled={isFetching}>
             LOGIN
           </Button>
+          {error && <Error>Something went wrong...</Error>}
           <Link
             to={"/register"}
             style={{ color: "black", textDecoration: "none" }}

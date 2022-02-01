@@ -4,17 +4,18 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
-import PayCheckoutPro from './components/PayCheckoutPro';
-import Success from './components/Success';
+import PayCheckoutPro from "./components/PayCheckoutPro";
+import Success from "./components/Success";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  const user = false;
+  const user = useSelector((state) => state.user.currentUser);
 
   return (
     <Router>
@@ -45,6 +46,5 @@ const App = () => {
     </Router>
   );
 };
-
 
 export default App;
