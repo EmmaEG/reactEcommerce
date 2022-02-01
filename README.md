@@ -10,30 +10,29 @@ LINK DEL DEPLOY: (Próximamente)
 
 TECNOLOGÍAS APLICADAS:
 
-    NodeJs
-    MongoDB
-    React
+    * NodeJs
+    * MongoDB
+    * React
 
 LIBRERÍAS INSTALADAS PARA EL BACKEND:
 
-    bcrypt
-    CryptoJS
-    jsonwebtoken
-    dotenv
-    express
-    mongoose
-    nodemon
-    cors
-    mercadopago
+    * bcrypt
+    * CryptoJS
+    * jsonwebtoken
+    * dotenv
+    * express
+    * mongoose
+    * nodemon
+    * cors
+    * mercadopago
 
 LIBRERÍAS INSTALADAS PARA EL FRONTEND:
 
-    react-redux
-    redux-persist
-    axios
-    bootstrap
-    react-router-dom
-    mercadopago
-    react-mercadopago-checkout
-    styled-components
+    * react-redux
+    * redux-persist
+    * axios
+    * bootstrap
+    * react-router-dom
+    * react-mercadopago-checkout
+    * styled-components
 
